@@ -1,0 +1,6 @@
+hosts:
+  default:
+    username: monitoring_ro
+    password: "YourBmcReadOnlyPassword"
+    ssl_verify: false
+    timeout: 15
