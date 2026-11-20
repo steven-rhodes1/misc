@@ -1,0 +1,22 @@
+[
+  {
+    "targets": [
+      "10.10.50.101",
+      "10.10.50.102"
+    ],
+    "labels": {
+      "vendor": "supermicro",
+      "model": "AS-2125HS-TNR"
+    }
+  },
+  {
+    "targets": [
+      "10.10.50.201",
+      "10.10.50.202"
+    ],
+    "labels": {
+      "vendor": "dell",
+      "model": "R640"
+    }
+  }
+]
