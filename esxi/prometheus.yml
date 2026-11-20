@@ -1,0 +1,29 @@
+global:
+  scrape_interval: 30s
+  evaluation_interval: 30s
+
+scrape_configs:
+  # 1. Dell iDRAC9 & Supermicro H13 BMCs (Chassis/CPU Temps, Fans, System & GPU Watts)
+  - job_name: 'redfish_bmc'
+    metrics_path: /redfish
+    file_sd_configs:
+      - files:
+          - '/etc/prometheus/targets/bmc_hosts.json'
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: redfish-exporter:9610
+
+  # 2. VCSA 8 ESXi Host CPU & RAM Metrics
+  - job_name: 'vcsa8_hosts'
+    static_configs:
+      - targets: ['otel-collector:8889']
+
+  # 3. ESXi vGPU Hosts (nvidia-smi metrics)
+  - job_name: 'esxi_vgpu'
+    file_sd_configs:
+      - files:
+          - '/etc/prometheus/targets/esxi_gpu_hosts.json'
